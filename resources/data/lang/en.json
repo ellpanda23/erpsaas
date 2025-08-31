@@ -202,5 +202,17 @@
     "Budget Items": "Budget Items",
     "Budget Allocations": "Budget Allocations",
     "Account Selection": "Account Selection",
-    "Custom": "Custom"
+    "Custom": "Custom",
+    "forms.sections.origin": "forms.sections.origin",
+    "forms.sections.destination": "forms.sections.destination",
+    "forms.sections.packages": "forms.sections.packages",
+    "logistics.forms.sections.origin": "logistics.forms.sections.origin",
+    "logistics.forms.sections.destination": "logistics.forms.sections.destination",
+    "logistics.forms.sections.packages": "logistics.forms.sections.packages",
+    "logistics_section_origin": "logistics_section_origin",
+    "logistics_section_destination": "logistics_section_destination",
+    "logistics_section_packages": "logistics_section_packages",
+    "Origin": "Origin",
+    "Destination": "Destination",
+    "Packages": "Packages"
 }

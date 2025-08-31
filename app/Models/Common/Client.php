@@ -166,6 +166,7 @@ class Client extends Model
                     'country_code' => $data['billingAddress']['country_code'] ?? null,
                     'state_id' => $data['billingAddress']['state_id'] ?? null,
                     'city' => $data['billingAddress']['city'] ?? null,
+                    'neighborhood' => $data['billingAddress']['neighborhood'] ?? null,
                     'postal_code' => $data['billingAddress']['postal_code'] ?? null,
                 ]
             );
@@ -188,6 +189,7 @@ class Client extends Model
                         'country_code' => $billingAddress->country_code,
                         'state_id' => $billingAddress->state_id,
                         'city' => $billingAddress->city,
+                        'neighborhood' => $billingAddress->neighborhood,
                         'postal_code' => $billingAddress->postal_code,
                     ];
 
@@ -208,6 +210,7 @@ class Client extends Model
                     'country_code' => $shippingData['country_code'] ?? null,
                     'state_id' => $shippingData['state_id'] ?? null,
                     'city' => $shippingData['city'] ?? null,
+                    'neighborhood' => $shippingData['neighborhood'] ?? null,
                     'postal_code' => $shippingData['postal_code'] ?? null,
                 ];
 

@@ -51,4 +51,9 @@ return [
         'client_secret' => env('PLAID_CLIENT_SECRET'),
         'environment' => env('PLAID_ENVIRONMENT', 'sandbox'),
     ],
+    'skydropx' => [
+        'base_uri' => env('SKYDROPX_URL'),
+        'client_id' => env('SKYDROPX_CLIENT_ID'),
+        'client_secret' => env('SKYDROPX_CLIENT_SECRET'),
+    ],
 ];

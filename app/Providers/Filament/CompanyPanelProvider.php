@@ -22,6 +22,7 @@ use App\Filament\Company\Pages\Accounting\AccountChart;
 use App\Filament\Company\Pages\CreateCompany;
 use App\Filament\Company\Pages\ManageCompany;
 use App\Filament\Company\Pages\Reports;
+use App\Filament\Company\Pages\QuoteShipment;
 use App\Filament\Company\Pages\Service\ConnectedAccount;
 use App\Filament\Company\Pages\Service\LiveCurrency;
 use App\Filament\Company\Resources\Accounting\BudgetResource;
@@ -36,6 +37,7 @@ use App\Filament\Company\Resources\Sales\InvoiceResource;
 use App\Filament\Company\Resources\Sales\RecurringInvoiceResource;
 use App\Filament\Components\PanelShiftDropdown;
 use App\Filament\Pages\Auth\Login;
+use App\Filament\Pages\QuoteShipment as PagesQuoteShipment;
 use App\Filament\User\Clusters\Account;
 use App\Http\Middleware\ConfigureCurrentCompany;
 use App\Livewire\UpdatePassword;
@@ -143,6 +145,11 @@ class CompanyPanelProvider extends PanelProvider
                                 ...InvoiceResource::getNavigationItems(),
                                 ...RecurringInvoiceResource::getNavigationItems(),
                             ]),
+                        NavigationGroup::make(__('Logistics'))
+                            ->icon('heroicon-o-truck') // Añadimos un ícono
+                            ->items([
+                                ...PagesQuoteShipment::getNavigationItems(),
+                            ]),
                         NavigationGroup::make('Purchases')
                             ->label('Purchases')
                             ->icon('heroicon-o-shopping-cart')
@@ -176,7 +183,7 @@ class CompanyPanelProvider extends PanelProvider
             ->sidebarCollapsibleOnDesktop()
             ->databaseNotifications(isLazy: false)
             ->viteTheme('resources/css/filament/company/theme.css')
-            ->brandLogo(static fn () => view('components.icons.logo'))
+            ->brandLogo(static fn() => view('components.icons.logo'))
             ->tenant(Company::class)
             ->tenantProfile(ManageCompany::class)
             ->tenantRegistration(CreateCompany::class)
@@ -185,6 +192,7 @@ class CompanyPanelProvider extends PanelProvider
             ->discoverClusters(in: app_path('Filament/Company/Clusters'), for: 'App\\Filament\\Company\\Clusters')
             ->pages([
                 // Pages\Dashboard::class,
+                PagesQuoteShipment::class,
             ])
             ->authGuard('web')
             ->discoverWidgets(in: app_path('Filament/Company/Widgets'), for: 'App\\Filament\\Company\\Widgets')
@@ -273,13 +281,13 @@ class CompanyPanelProvider extends PanelProvider
                 ->hidden(is_demo_environment());
         });
 
-        Actions\CreateAction::configureUsing(static fn (Actions\CreateAction $action) => FilamentComponentConfigurator::configureActionModals($action));
-        Actions\EditAction::configureUsing(static fn (Actions\EditAction $action) => FilamentComponentConfigurator::configureActionModals($action));
-        Actions\DeleteAction::configureUsing(static fn (Actions\DeleteAction $action) => FilamentComponentConfigurator::configureDeleteAction($action));
-        Tables\Actions\EditAction::configureUsing(static fn (Tables\Actions\EditAction $action) => FilamentComponentConfigurator::configureActionModals($action));
-        Tables\Actions\CreateAction::configureUsing(static fn (Tables\Actions\CreateAction $action) => FilamentComponentConfigurator::configureActionModals($action));
-        Tables\Actions\DeleteAction::configureUsing(static fn (Tables\Actions\DeleteAction $action) => FilamentComponentConfigurator::configureDeleteAction($action));
-        Tables\Actions\DeleteBulkAction::configureUsing(static fn (Tables\Actions\DeleteBulkAction $action) => FilamentComponentConfigurator::configureDeleteAction($action));
+        Actions\CreateAction::configureUsing(static fn(Actions\CreateAction $action) => FilamentComponentConfigurator::configureActionModals($action));
+        Actions\EditAction::configureUsing(static fn(Actions\EditAction $action) => FilamentComponentConfigurator::configureActionModals($action));
+        Actions\DeleteAction::configureUsing(static fn(Actions\DeleteAction $action) => FilamentComponentConfigurator::configureDeleteAction($action));
+        Tables\Actions\EditAction::configureUsing(static fn(Tables\Actions\EditAction $action) => FilamentComponentConfigurator::configureActionModals($action));
+        Tables\Actions\CreateAction::configureUsing(static fn(Tables\Actions\CreateAction $action) => FilamentComponentConfigurator::configureActionModals($action));
+        Tables\Actions\DeleteAction::configureUsing(static fn(Tables\Actions\DeleteAction $action) => FilamentComponentConfigurator::configureDeleteAction($action));
+        Tables\Actions\DeleteBulkAction::configureUsing(static fn(Tables\Actions\DeleteBulkAction $action) => FilamentComponentConfigurator::configureDeleteAction($action));
 
         Tables\Table::configureUsing(static function (Tables\Table $table): void {
             $table::$defaultDateDisplayFormat = CompanySettingsService::getDefaultDateFormat();
@@ -290,7 +298,7 @@ class CompanyPanelProvider extends PanelProvider
                 ->paginationPageOptions([5, 10, 25, 50, 100])
                 ->filtersFormWidth(MaxWidth::Small)
                 ->filtersTriggerAction(
-                    fn (Tables\Actions\Action $action) => $action
+                    fn(Tables\Actions\Action $action) => $action
                         ->button()
                         ->label('Filters')
                         ->slideOver()
@@ -320,7 +328,7 @@ class CompanyPanelProvider extends PanelProvider
         Select::configureUsing(function (Select $select): void {
             $select
                 ->native(false)
-                ->selectablePlaceholder(fn (Select $component) => ! $component->isRequired());
+                ->selectablePlaceholder(fn(Select $component) => ! $component->isRequired());
         });
     }
 }

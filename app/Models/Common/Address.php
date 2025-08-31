@@ -32,6 +32,7 @@ class Address extends Model
         'address_line_2',
         'city',
         'state_id',
+        'neighborhood',
         'postal_code',
         'country_code',
         'notes',
@@ -80,6 +81,7 @@ class Address extends Model
                 implode(', ', $street), // Street 1 & 2 on same line if both exist
                 implode(', ', array_filter([
                     $this->city,
+                    $this->neighborhood,
                     $this->state->name,
                     $this->postal_code,
                 ])),

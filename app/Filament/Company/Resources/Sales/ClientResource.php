@@ -100,7 +100,7 @@ class ClientResource extends Resource
                                                     ->maxLength(15),
                                             ])->maxItems(1),
                                     ])
-                                    ->deletable(fn (PhoneBuilder $builder) => $builder->getItemsCount() > 1)
+                                    ->deletable(fn(PhoneBuilder $builder) => $builder->getItemsCount() > 1)
                                     ->reorderable(false)
                                     ->blockNumbers(false)
                                     ->addActionLabel('Add Phone'),
@@ -224,6 +224,7 @@ class ClientResource extends Resource
                                             'address_line_1',
                                             'address_line_2',
                                             'country_code',
+                                            'neighborhood',
                                             'state_id',
                                             'city',
                                             'postal_code',
@@ -235,7 +236,7 @@ class ClientResource extends Resource
                                     })
                                     ->columnSpanFull(),
                                 AddressFields::make()
-                                    ->visible(static fn (Get $get) => ! $get('same_as_billing')),
+                                    ->visible(static fn(Get $get) => ! $get('same_as_billing')),
                                 Forms\Components\Textarea::make('notes')
                                     ->label('Delivery instructions')
                                     ->maxLength(255)
@@ -253,7 +254,7 @@ class ClientResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable()
-                    ->description(static fn (Client $client) => $client->primaryContact?->full_name),
+                    ->description(static fn(Client $client) => $client->primaryContact?->full_name),
                 Tables\Columns\TextColumn::make('primaryContact.email')
                     ->label('Email')
                     ->searchable()
@@ -261,7 +262,7 @@ class ClientResource extends Resource
                 Tables\Columns\TextColumn::make('primaryContact.phones')
                     ->label('Phone')
                     ->toggleable()
-                    ->state(static fn (Client $client) => $client->primaryContact?->first_available_phone),
+                    ->state(static fn(Client $client) => $client->primaryContact?->first_available_phone),
                 Tables\Columns\TextColumn::make('billingAddress.address_string')
                     ->label('Billing address')
                     ->searchable()
@@ -291,7 +292,7 @@ class ClientResource extends Resource
                     })
                     ->sortable(query: function (Builder $query, string $direction) {
                         return $query
-                            ->withSum(['invoices' => fn (Builder $query) => $query->unpaid()], 'amount_due')
+                            ->withSum(['invoices' => fn(Builder $query) => $query->unpaid()], 'amount_due')
                             ->orderBy('invoices_sum_amount_due', $direction);
                     })
                     ->currency(convert: false)
