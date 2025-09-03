@@ -38,6 +38,7 @@ use App\Filament\Company\Resources\Sales\RecurringInvoiceResource;
 use App\Filament\Components\PanelShiftDropdown;
 use App\Filament\Pages\Auth\Login;
 use App\Filament\Pages\QuoteShipment as PagesQuoteShipment;
+use App\Filament\Company\Pages\ListShipments;
 use App\Filament\User\Clusters\Account;
 use App\Http\Middleware\ConfigureCurrentCompany;
 use App\Livewire\UpdatePassword;
@@ -149,6 +150,7 @@ class CompanyPanelProvider extends PanelProvider
                             ->icon('heroicon-o-truck') // Añadimos un ícono
                             ->items([
                                 ...PagesQuoteShipment::getNavigationItems(),
+                                ...ListShipments::getNavigationItems(),
                             ]),
                         NavigationGroup::make('Purchases')
                             ->label('Purchases')

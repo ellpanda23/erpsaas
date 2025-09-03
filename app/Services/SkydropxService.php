@@ -93,6 +93,43 @@ class SkydropxService
         return $this->handleResponse($response, 'Error al crear la guía');
     }
 
+
+    /**
+     * Obtiene una lista paginada de órdenes.
+     *
+     * @param int $page El número de página a solicitar.
+     * @param int $perPage El número de resultados por página.
+     * @return array|null
+     */
+    public function obtenerOrdenes(int $page = 1, int $perPage = 15): ?array
+    {
+        // Usamos el endpoint correcto de la documentación: 'orders'
+        $response = $this->client()->get('orders', [
+            'page' => $page,
+            'per_page' => $perPage,
+        ]);
+
+        return $this->handleResponse($response, 'Error al obtener la lista de órdenes');
+    }
+
+    /**
+     * Obtiene una lista paginada de envíos (shipments).
+     *
+     * @param int $page El número de página a solicitar.
+     * @param int $perPage El número de resultados por página.
+     * @return array|null
+     */
+    public function obtenerEnvios(int $page = 1, int $perPage = 10): ?array
+    {
+        // Usamos el endpoint correcto de la documentación: 'shipments'
+        $response = $this->client()->get('shipments', [
+            'page' => $page,
+            'per_page' => $perPage,
+        ]);
+
+        return $this->handleResponse($response, 'Error al obtener la lista de envíos');
+    }
+
     /**
      * Maneja la respuesta de la API y los errores.
      */
